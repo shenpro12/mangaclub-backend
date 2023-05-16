@@ -5,7 +5,7 @@ import { Chapter } from './chapter.entity';
 @Entity()
 export class Image extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ type: 'varchar', length: 500 })
   thumb_url: string;

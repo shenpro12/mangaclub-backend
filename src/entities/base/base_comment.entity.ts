@@ -4,7 +4,7 @@ import { BaseEntity } from './base.entity';
 @Entity()
 export abstract class BaseCommentEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ type: 'varchar', length: 2000 })
   content: string;

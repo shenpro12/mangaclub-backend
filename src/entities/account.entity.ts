@@ -8,7 +8,7 @@ import { Bookmark } from './bookmark.entity';
 @Entity()
 export class Account extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ type: 'varchar', length: 100 })
   userName: string;
@@ -21,6 +21,9 @@ export class Account extends BaseEntity {
 
   @Column({ type: 'varchar', length: 100 })
   email: string;
+
+  @Column({ type: 'boolean' })
+  isAdmin: boolean;
 
   @OneToMany(() => MangaComment, (comment) => comment.account)
   manga_comments: MangaComment[];

@@ -6,7 +6,7 @@ import { Manga } from './manga.entity';
 @Entity()
 export class Bookmark extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @ManyToOne(() => Manga, (manga) => manga.bookmarks)
   manga: Manga;

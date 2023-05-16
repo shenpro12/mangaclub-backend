@@ -1,12 +1,17 @@
-import { Column } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export abstract class BaseEntity {
-  @Column({ type: 'date' })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column({ type: 'date', nullable: true })
+  @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column({ type: 'date', nullable: true })
+  @DeleteDateColumn()
   deleteAt: Date;
 }

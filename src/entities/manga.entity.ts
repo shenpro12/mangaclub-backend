@@ -16,7 +16,7 @@ import { Bookmark } from './bookmark.entity';
 @Entity()
 export class Manga extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ type: 'varchar', length: 500 })
   name: string;
@@ -45,7 +45,7 @@ export class Manga extends BaseEntity {
   @OneToMany(() => Chapter, (chapter) => chapter.manga)
   chapters: Chapter[];
 
-  @ManyToMany(() => Category)
+  @ManyToMany(() => Category, (category) => category.manga)
   @JoinTable()
   categories: Category[];
 

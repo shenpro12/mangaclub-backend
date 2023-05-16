@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MangaModule } from './modules/manga/manga.module';
+import { ManagerModule } from './modules/manager/manager.module';
+import { AccountModule } from './modules/account/account.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -15,9 +17,10 @@ import { MangaModule } from './modules/manga/manga.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: ['dist/entities/*.entity{.ts,.js}'],
-      synchronize: true,
     }),
     MangaModule,
+    AccountModule,
+    ManagerModule,
   ],
 })
 export class AppModule {}

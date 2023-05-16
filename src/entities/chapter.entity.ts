@@ -13,7 +13,7 @@ import { ChapterComment } from './chapter_comment.entity';
 @Entity()
 export class Chapter extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ type: 'varchar', length: 200 })
   title: string;

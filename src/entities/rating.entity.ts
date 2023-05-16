@@ -6,7 +6,7 @@ import { Manga } from './manga.entity';
 @Entity()
 export class Rating extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ type: 'integer' })
   point: number;
