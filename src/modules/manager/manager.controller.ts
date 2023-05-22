@@ -10,6 +10,7 @@ import {
 import { CreateMangaDto } from 'src/dto/create_manga.dto';
 import { ManagerService } from './manager.service';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { CreateCategoryDto } from 'src/dto/create_category.dto';
 
 @Controller('manager')
 export class ManagerController {
@@ -27,5 +28,10 @@ export class ManagerController {
     file: Express.Multer.File,
   ) {
     return this.managerService.createManga(body, file);
+  }
+
+  @Post('category/create')
+  createCategory(@Body() body: CreateCategoryDto) {
+    return this.managerService.createCategory(body);
   }
 }

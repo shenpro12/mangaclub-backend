@@ -29,8 +29,4 @@ export class CreateMangaDto {
   @IsNotEmpty()
   @MaxLength(2000)
   description: string;
-
-  @IsNotEmpty()
-  @IsNumberString()
-  views: number;
 }

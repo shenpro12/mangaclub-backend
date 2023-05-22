@@ -22,7 +22,6 @@ export class AccountController {
   @Post('signin')
   async signin(@Body() body: SignInDto, @Res() res: Response) {
     let signStatus: any = await this.accountService.signIn(body);
-    console.log(signStatus);
     if (signStatus.status) {
       return res.json({ status: true, user: signStatus.user });
     } else {
