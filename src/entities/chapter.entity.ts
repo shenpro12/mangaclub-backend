@@ -8,7 +8,6 @@ import {
 import { BaseEntity } from './base/base.entity';
 import { Manga } from './manga.entity';
 import { Image } from './image.entity';
-import { ChapterComment } from './chapter_comment.entity';
 
 @Entity()
 export class Chapter extends BaseEntity {
@@ -29,7 +28,4 @@ export class Chapter extends BaseEntity {
 
   @OneToMany(() => Image, (image) => image.chapter)
   images: Image[];
-
-  @OneToMany(() => ChapterComment, (comment) => comment.chapter)
-  comments: ChapterComment[];
 }

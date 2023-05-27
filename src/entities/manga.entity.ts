@@ -9,7 +9,6 @@ import {
 import { BaseEntity } from './base/base.entity';
 import { Chapter } from './chapter.entity';
 import { Category } from './category.entity';
-import { MangaComment } from './manga_comment.entity';
 import { Rating } from './rating.entity';
 import { Bookmark } from './bookmark.entity';
 
@@ -48,9 +47,6 @@ export class Manga extends BaseEntity {
   @ManyToMany(() => Category, (category) => category.manga)
   @JoinTable()
   categories: Category[];
-
-  @OneToMany(() => MangaComment, (comment) => comment.manga)
-  comments: Comment[];
 
   @OneToMany(() => Rating, (rating) => rating.manga)
   ratings: Rating[];

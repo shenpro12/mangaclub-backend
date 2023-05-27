@@ -33,6 +33,7 @@ export class MangaService {
           ratings: true,
           categories: true,
           bookmarks: true,
+          chapters: { images: true },
         },
       });
     } catch (error) {
