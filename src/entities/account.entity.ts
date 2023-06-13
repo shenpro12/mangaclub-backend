@@ -26,6 +26,6 @@ export class Account extends BaseEntity {
   @OneToMany(() => Rating, (rating) => rating.account)
   ratings: Rating[];
 
-  @OneToMany(() => Bookmark, (bookmark) => bookmark.manga)
+  @OneToMany(() => Bookmark, (bookmark) => bookmark.account)
   bookmarks: Bookmark[];
 }

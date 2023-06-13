@@ -8,4 +8,7 @@ export class RefeshToken extends BaseEntity {
 
   @Column({ type: 'varchar', length: 2000 })
   token: string;
+
+  @Column({ type: 'varchar', length: 100 })
+  userId: string;
 }

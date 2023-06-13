@@ -7,6 +7,8 @@ import { Account } from 'src/entities/account.entity';
 import { SignInDto } from 'src/dto/auth_signin.dto';
 import { generateToken } from 'src/helper/jwt.helper';
 import { RefeshToken } from 'src/entities/user_refeshtoken.entity';
+import { ApiResponse } from 'src/classes';
+import { Bookmark } from 'src/entities/bookmark.entity';
 
 @Injectable()
 export class AccountService {
@@ -15,6 +17,8 @@ export class AccountService {
     private readonly accountRepository: Repository<Account>,
     @InjectRepository(RefeshToken)
     private readonly refeshTokenRepository: Repository<RefeshToken>,
+    @InjectRepository(Bookmark)
+    private readonly bookmarkRepository: Repository<Bookmark>,
   ) {}
   async createAccount(accountInfo: CreateAccountDto) {
     try {
@@ -85,6 +89,7 @@ export class AccountService {
         );
         let rftk = new RefeshToken();
         rftk.token = refeshToken;
+        rftk.userId = user.id;
         await this.refeshTokenRepository.save(rftk);
         return {
           status: true,
@@ -106,6 +111,105 @@ export class AccountService {
       }
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async getUserProfile(userId: string) {
+    try {
+      const userProfile = await this.accountRepository.findOne({
+        select: {
+          id: true,
+          userName: true,
+          avatar: true,
+          email: true,
+          isAdmin: true,
+        },
+        where: { id: userId },
+        relations: {
+          bookmarks: { manga: { chapters: true, ratings: true } },
+        },
+      });
+      return new ApiResponse(200, 'success', '', userProfile);
+    } catch (error) {
+      console.log(error);
+      return new ApiResponse(404, 'somtthing wrong', 'bad request');
+    }
+  }
+
+  async getNewAccessToken(userId: string, rftk: string) {
+    try {
+      let result = await this.refeshTokenRepository.findOne({
+        where: {
+          userId: userId,
+          token: rftk,
+        },
+      });
+      if (result) {
+        let user = await this.accountRepository.findOne({
+          where: { id: userId },
+        });
+        let accessToken = await generateToken(
+          user,
+          process.env.TOKEN_SECRET,
+          process.env.ACCESS_TOKELIFE,
+        );
+        return new ApiResponse(200, 'success', '', accessToken);
+      } else {
+        return new ApiResponse(401, 'token expired', 'bad request');
+      }
+    } catch (error) {
+      console.log(error);
+      return new ApiResponse(404, 'somtthing wrong', 'bad request');
+    }
+  }
+
+  async deleteBookmarkById(bookmarkId: string, userId: string) {
+    try {
+      let user = await this.accountRepository.findOne({
+        where: { id: userId },
+        relations: {
+          bookmarks: true,
+        },
+      });
+      let bookmark = user.bookmarks.find((i) => i.id === bookmarkId);
+      if (bookmark) {
+        let result = await this.bookmarkRepository.softRemove(bookmark);
+        return new ApiResponse(200, 'delete success', '', result);
+      } else {
+        return new ApiResponse(404, 'not found', 'bad request');
+      }
+    } catch (error) {
+      console.log(error);
+      return new ApiResponse(404, 'somtthing wrong', 'bad request');
+    }
+  }
+
+  async deleteBookmarkByListId(bookmarksId: Array<string>, userId: string) {
+    try {
+      let user = await this.accountRepository.findOne({
+        where: { id: userId },
+        relations: {
+          bookmarks: true,
+        },
+      });
+      let bookmarks: Array<Bookmark> = [];
+      for (let j = 0; j < bookmarksId.length; j++) {
+        let temp: Bookmark = user.bookmarks.find(
+          (i) => i.id === bookmarksId[j],
+        );
+        if (temp) {
+          bookmarks.push(temp);
+        }
+      }
+      if (bookmarks) {
+        let result = await this.bookmarkRepository.softRemove(bookmarks);
+        return new ApiResponse(200, 'delete success', '', result);
+      } else {
+        return new ApiResponse(404, 'not found', 'bad request');
+      }
+    } catch (error) {
+      console.log(error);
+      return new ApiResponse(404, 'somtthing wrong', 'bad request');
     }
   }
 }
