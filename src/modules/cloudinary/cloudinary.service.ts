@@ -17,4 +17,17 @@ export class CloudinaryService {
       streamifier.createReadStream(file.buffer).pipe(uploadStream);
     });
   }
+  deleteImage(imageUrl: string) {
+    return new Promise((resolve, reject) => {
+      cloudinary.uploader.destroy(
+        imageUrl.split('/')[7].split('.')[0],
+        function (error, result) {
+          if (error) {
+            reject(error);
+          }
+          resolve(result);
+        },
+      );
+    });
+  }
 }

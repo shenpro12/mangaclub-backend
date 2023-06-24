@@ -86,6 +86,12 @@ export class SiteService {
         }
         //
       }
+      //
+      for (let i = 0; i < mangaList.length; i++) {
+        mangaList[i].chapters.sort((a, b) => b.order - a.order);
+      }
+      //
+
       return new ApiResponse(200, 'success', '', {
         mangaList,
         page: currPage,
@@ -160,7 +166,10 @@ export class SiteService {
           }
         }
       }
-
+      //
+      for (let i = 0; i < mangaList.length; i++) {
+        mangaList[i].chapters.sort((a, b) => b.order - a.order);
+      } //
       return new ApiResponse(200, 'success', '', {
         mangaList,
         page: currPage,

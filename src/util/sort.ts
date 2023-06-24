@@ -9,10 +9,18 @@ export const mangaSort = (mangaList: Array<Manga>, fillter?: any) => {
     });
   }
   if (fillter == 'latest' || !fillter) {
-    return [...mangaList].sort(
-      (a, b) =>
-        Date.parse(b.updatedAt.toString()) - Date.parse(a.updatedAt.toString()),
-    );
+    return [...mangaList].sort((a, b) => {
+      let a_lastChapter = a.chapters.reduce((acc, curr) =>
+        acc.order > curr.order ? acc : curr,
+      );
+      let b_lastChapter = b.chapters.reduce((acc, curr) =>
+        acc.order > curr.order ? acc : curr,
+      );
+      return (
+        Date.parse(b_lastChapter.createdAt.toString()) -
+        Date.parse(a_lastChapter.createdAt.toString())
+      );
+    });
   }
   if (fillter == 'rating') {
     return [...mangaList].sort((a, b) => {

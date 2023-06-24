@@ -6,7 +6,7 @@ import { PAGE_SIZE } from 'src/constant';
 import { Manga } from 'src/entities/manga.entity';
 import { getPages } from 'src/util/getPages';
 import { mangaSort } from 'src/util/sort';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 
 @Injectable()
 export class MangaService {
@@ -49,6 +49,10 @@ export class MangaService {
         }
       }
       //
+      for (let i = 0; i < mangaList.length; i++) {
+        mangaList[i].chapters.sort((a, b) => b.order - a.order);
+      }
+      //
       return new ApiResponse(200, 'success', '', {
         mangaList,
         page: currPage,
@@ -65,9 +69,47 @@ export class MangaService {
 
   async findManga(slug: string) {
     try {
-      let result = await this.mangaRepository.findOne({
+      let result: Manga = await this.mangaRepository.findOne({
         where: {
           slug: slug,
+        },
+        relations: {
+          ratings: true,
+          categories: true,
+          bookmarks: { account: true },
+          chapters: { images: true },
+        },
+      });
+
+      result.chapters.sort((a, b) => b.order - a.order);
+
+      result.bookmarks = result.bookmarks.map((i) => ({
+        ...i,
+        account: {
+          ...i.account,
+          password: null,
+          createdAt: null,
+          updatedAt: null,
+          deleteAt: null,
+          isAdmin: null,
+          email: null,
+          userName: null,
+          avatar: null,
+        },
+      }));
+
+      return new ApiResponse(200, 'success', '', result);
+    } catch (error) {
+      console.log(error);
+      return new ApiResponse(404, 'something wrong ', 'bad request');
+    }
+  }
+
+  async findMangaById(id: string) {
+    try {
+      let result: Manga = await this.mangaRepository.findOne({
+        where: {
+          id: id,
         },
         relations: {
           ratings: true,
@@ -76,10 +118,27 @@ export class MangaService {
           chapters: { images: true },
         },
       });
+      if (result) {
+        result.chapters.sort((a, b) => b.order - a.order);
+      }
+
       return new ApiResponse(200, 'success', '', result);
     } catch (error) {
       console.log(error);
       return new ApiResponse(404, 'something wrong ', 'bad request');
+    }
+  }
+
+  async getRelatedManga(genres: Array<string>, limit: number) {
+    try {
+      let manga: Array<Manga> = await this.mangaRepository.find({
+        where: { categories: { name: In(genres ? genres : []) } },
+        take: limit,
+      });
+      return new ApiResponse(200, 'success', '', { mangaList: manga });
+    } catch (error) {
+      console.log(error);
+      return new ApiResponse(404, 'songthing went wrong', 'bad request');
     }
   }
 }

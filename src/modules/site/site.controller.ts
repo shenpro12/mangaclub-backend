@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Query, Res } from '@nestjs/common';
 import { SiteService } from './site.service';
 import { Response } from 'express';
 
@@ -19,6 +19,11 @@ export class SiteController {
   @Get('search')
   async searchManga(@Query() query: any, @Res() res: Response) {
     const response = await this.siteService.searchManga(query);
+    await new Promise((resl) => {
+      setTimeout(() => {
+        resl(1);
+      }, 5000);
+    });
     return res.status(response.status).json(response);
   }
 
