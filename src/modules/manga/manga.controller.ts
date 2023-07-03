@@ -5,6 +5,12 @@ import { Response } from 'express';
 @Controller('manga')
 export class MangaController {
   constructor(private readonly mangaService: MangaService) {}
+  @Get('chapter/:id')
+  async getChapterById(@Param('id') id: string, @Res() res: Response) {
+    const response = await this.mangaService.findChapterById(id);
+    return res.status(response.status).json(response);
+  }
+
   @Get('id/:id')
   async getMangaByid(@Param('id') id: string, @Res() res: Response) {
     const response = await this.mangaService.findMangaById(id);

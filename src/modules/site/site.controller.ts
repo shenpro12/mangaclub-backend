@@ -19,11 +19,6 @@ export class SiteController {
   @Get('search')
   async searchManga(@Query() query: any, @Res() res: Response) {
     const response = await this.siteService.searchManga(query);
-    await new Promise((resl) => {
-      setTimeout(() => {
-        resl(1);
-      }, 5000);
-    });
     return res.status(response.status).json(response);
   }
 

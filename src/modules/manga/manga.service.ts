@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { isNumberString } from 'class-validator';
 import { ApiResponse } from 'src/classes';
 import { PAGE_SIZE } from 'src/constant';
+import { Chapter } from 'src/entities/chapter.entity';
 import { Manga } from 'src/entities/manga.entity';
 import { getPages } from 'src/util/getPages';
 import { mangaSort } from 'src/util/sort';
@@ -13,6 +14,8 @@ export class MangaService {
   constructor(
     @InjectRepository(Manga)
     private readonly mangaRepository: Repository<Manga>,
+    @InjectRepository(Chapter)
+    private readonly chapterRepository: Repository<Chapter>,
   ) {}
 
   async findAllManga(query?: any) {
@@ -121,6 +124,7 @@ export class MangaService {
       if (result) {
         result.chapters.sort((a, b) => b.order - a.order);
       }
+      //console.log(result);
 
       return new ApiResponse(200, 'success', '', result);
     } catch (error) {
@@ -139,6 +143,26 @@ export class MangaService {
     } catch (error) {
       console.log(error);
       return new ApiResponse(404, 'songthing went wrong', 'bad request');
+    }
+  }
+
+  async findChapterById(id: string) {
+    try {
+      let result: Chapter = await this.chapterRepository.findOne({
+        where: {
+          id: id,
+        },
+        relations: { images: true },
+      });
+      if (result) {
+        result.images.sort((a, b) => a.order - b.order);
+      }
+      //console.log(result);
+
+      return new ApiResponse(200, 'success', '', result);
+    } catch (error) {
+      console.log(error);
+      return new ApiResponse(404, 'something wrong ', 'bad request');
     }
   }
 }
