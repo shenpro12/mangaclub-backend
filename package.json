@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "author": "",
+  "main": "src/main.ts",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
