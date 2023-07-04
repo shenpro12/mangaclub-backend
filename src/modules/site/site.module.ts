@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Category } from 'src/entities/category.entity';
+import { Category } from '../../entities/category.entity';
 import { SiteController } from './site.controller';
 import { SiteService } from './site.service';
-import { Manga } from 'src/entities/manga.entity';
+import { Manga } from '../../entities/manga.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Category, Manga])],
   controllers: [SiteController],

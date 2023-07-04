@@ -1,6 +1,6 @@
-import { ApiResponse } from 'src/classes';
-import { Category } from 'src/entities/category.entity';
-import { Manga } from 'src/entities/manga.entity';
+import { ApiResponse } from '../../classes';
+import { Category } from '../../entities/category.entity';
+import { Manga } from '../../entities/manga.entity';
 import { Repository } from 'typeorm';
 export declare class SiteService {
     private readonly categoryRepository;

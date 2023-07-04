@@ -7,10 +7,10 @@ import {
   ParseFilePipe,
   FileTypeValidator,
 } from '@nestjs/common';
-import { CreateMangaDto } from 'src/dto/create_manga.dto';
+import { CreateMangaDto } from '../../dto/create_manga.dto';
 import { ManagerService } from './manager.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CreateCategoryDto } from 'src/dto/create_category.dto';
+import { CreateCategoryDto } from '../../dto/create_category.dto';
 
 @Controller('manager')
 export class ManagerController {

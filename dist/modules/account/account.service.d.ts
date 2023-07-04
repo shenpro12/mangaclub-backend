@@ -1,13 +1,13 @@
 /// <reference types="multer" />
 import { Repository } from 'typeorm';
-import { CreateAccountDto } from 'src/dto/create_account.dto';
-import { Account } from 'src/entities/account.entity';
-import { SignInDto } from 'src/dto/auth_signin.dto';
-import { RefeshToken } from 'src/entities/user_refeshtoken.entity';
-import { ApiResponse } from 'src/classes';
-import { Bookmark } from 'src/entities/bookmark.entity';
-import { Manga } from 'src/entities/manga.entity';
-import { Rating } from 'src/entities/rating.entity';
+import { CreateAccountDto } from '../../dto/create_account.dto';
+import { Account } from '../../entities/account.entity';
+import { SignInDto } from '../../dto/auth_signin.dto';
+import { RefeshToken } from '../../entities/user_refeshtoken.entity';
+import { ApiResponse } from '../../classes';
+import { Bookmark } from '../../entities/bookmark.entity';
+import { Manga } from '../../entities/manga.entity';
+import { Rating } from '../../entities/rating.entity';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 export declare class AccountService {
     private readonly accountRepository;

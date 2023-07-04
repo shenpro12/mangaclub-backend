@@ -1,6 +1,6 @@
-import { ApiResponse } from 'src/classes';
-import { Chapter } from 'src/entities/chapter.entity';
-import { Manga } from 'src/entities/manga.entity';
+import { ApiResponse } from '../../classes';
+import { Chapter } from '../../entities/chapter.entity';
+import { Manga } from '../../entities/manga.entity';
 import { Repository } from 'typeorm';
 export declare class MangaService {
     private readonly mangaRepository;

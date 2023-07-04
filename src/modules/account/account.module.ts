@@ -7,12 +7,12 @@ import {
 import { AccountController } from './account.controller';
 import { AccountService } from './account.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Account } from 'src/entities/account.entity';
-import { RefeshToken } from 'src/entities/user_refeshtoken.entity';
-import { Auth } from 'src/middleware/auth.middleware';
-import { Bookmark } from 'src/entities/bookmark.entity';
-import { Manga } from 'src/entities/manga.entity';
-import { Rating } from 'src/entities/rating.entity';
+import { Account } from '../../entities/account.entity';
+import { RefeshToken } from '../../entities/user_refeshtoken.entity';
+import { Auth } from '../../middleware/auth.middleware';
+import { Bookmark } from '../../entities/bookmark.entity';
+import { Manga } from '../../entities/manga.entity';
+import { Rating } from '../../entities/rating.entity';
 import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 @Module({
   imports: [

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Manga } from 'src/entities/manga.entity';
+import { Manga } from '../../entities/manga.entity';
 import { ManagerController } from './manager.controller';
 import { ManagerService } from './manager.service';
 import { CloudinaryModule } from '../cloudinary/cloudinary.module';
-import { Category } from 'src/entities/category.entity';
+import { Category } from '../../entities/category.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Manga, Category]), CloudinaryModule],
   controllers: [ManagerController],

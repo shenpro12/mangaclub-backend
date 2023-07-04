@@ -1,12 +1,12 @@
 /// <reference types="multer" />
-import { CreateAccountDto } from 'src/dto/create_account.dto';
+import { CreateAccountDto } from '../../dto/create_account.dto';
 import { AccountService } from './account.service';
 import { Request, Response } from 'express';
-import { SignInDto } from 'src/dto/auth_signin.dto';
-import { UpdateUserNameDto } from 'src/dto/updateUserName.dto';
-import { UpdateEmailDto } from 'src/dto/updateEmail.dto';
-import { UpdatePasswordDto } from 'src/dto/updatePassword.dto';
-import { ResetPasswordDto } from 'src/dto/resetPassword.dto';
+import { SignInDto } from '../../dto/auth_signin.dto';
+import { UpdateUserNameDto } from '../../dto/updateUserName.dto';
+import { UpdateEmailDto } from '../../dto/updateEmail.dto';
+import { UpdatePasswordDto } from '../../dto/updatePassword.dto';
+import { ResetPasswordDto } from '../../dto/resetPassword.dto';
 export declare class AccountController {
     private readonly accountService;
     constructor(accountService: AccountService);

@@ -1,4 +1,4 @@
-import { Manga } from 'src/entities/manga.entity';
+import { Manga } from '../entities/manga.entity';
 
 export const mangaSort = (mangaList: Array<Manga>, fillter?: any) => {
   if (fillter == 'alphabet') {

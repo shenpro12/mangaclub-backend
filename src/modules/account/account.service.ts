@@ -2,17 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 const bcrypt = require('bcrypt');
-import { CreateAccountDto } from 'src/dto/create_account.dto';
-import { Account } from 'src/entities/account.entity';
-import { SignInDto } from 'src/dto/auth_signin.dto';
-import { generateToken } from 'src/helper/jwt.helper';
-import { RefeshToken } from 'src/entities/user_refeshtoken.entity';
-import { ApiResponse } from 'src/classes';
-import { Bookmark } from 'src/entities/bookmark.entity';
-import { Manga } from 'src/entities/manga.entity';
-import { Rating } from 'src/entities/rating.entity';
+import { CreateAccountDto } from '../../dto/create_account.dto';
+import { Account } from '../../entities/account.entity';
+import { SignInDto } from '../../dto/auth_signin.dto';
+import { generateToken } from '../../helper/jwt.helper';
+import { RefeshToken } from '../../entities/user_refeshtoken.entity';
+import { ApiResponse } from '../../classes';
+import { Bookmark } from '../../entities/bookmark.entity';
+import { Manga } from '../../entities/manga.entity';
+import { Rating } from '../../entities/rating.entity';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
-import { ResetPasswordDto } from 'src/dto/resetPassword.dto';
 const nodeMailer = require('nodemailer');
 
 @Injectable()

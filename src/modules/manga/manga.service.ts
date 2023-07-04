@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isNumberString } from 'class-validator';
-import { ApiResponse } from 'src/classes';
-import { PAGE_SIZE } from 'src/constant';
-import { Chapter } from 'src/entities/chapter.entity';
-import { Manga } from 'src/entities/manga.entity';
-import { getPages } from 'src/util/getPages';
-import { mangaSort } from 'src/util/sort';
+import { ApiResponse } from '../../classes';
+import { PAGE_SIZE } from '../../constant';
+import { Chapter } from '../../entities/chapter.entity';
+import { Manga } from '../../entities/manga.entity';
+import { getPages } from '../../util/getPages';
+import { mangaSort } from '../../util/sort';
 import { In, Repository } from 'typeorm';
 
 @Injectable()

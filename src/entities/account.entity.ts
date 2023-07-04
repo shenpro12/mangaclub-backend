@@ -2,7 +2,6 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { BaseEntity } from './base/base.entity';
 import { Rating } from './rating.entity';
 import { Bookmark } from './bookmark.entity';
-import { ResetPasswordDto } from 'src/dto/resetPassword.dto';
 
 @Entity()
 export class Account extends BaseEntity {

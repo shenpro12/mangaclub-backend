@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyToken } from 'src/helper/jwt.helper';
+import { verifyToken } from '../helper/jwt.helper';
 
 export async function Auth(req: Request, res: Response, next: NextFunction) {
   const accessToken = req.headers.authorization.replace('Bearer ', '');
