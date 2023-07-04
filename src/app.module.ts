@@ -17,7 +17,7 @@ import { SiteModule } from './modules/site/site.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: ['dist/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/../**/*.entity.{js,ts}'],
     }),
     MangaModule,
     AccountModule,
