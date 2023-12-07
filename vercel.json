@@ -16,7 +16,10 @@
                 "PUT",
                 "PATCH",
                 "DELETE",
-                "OPTIONS"
+                "OPTIONS",
+                "HEAD",
+                "CONNECT",
+                "TRACE"
             ]
         }
     ]
